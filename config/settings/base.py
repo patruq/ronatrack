@@ -8,7 +8,7 @@ import environ
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # ronatrack/
 APPS_DIR = ROOT_DIR / "ronatrack"
-env = environ.Env()
+env = environ.Env(CORS_ORIGIN_WHITELIST=(list, []))
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "ronatrack.users.apps.UsersConfig",
+    "ronatrack.survey.apps.SurveyConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -296,6 +297,7 @@ SOCIALACCOUNT_ADAPTER = "ronatrack.users.adapters.SocialAccountAdapter"
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
@@ -304,5 +306,7 @@ REST_FRAMEWORK = {
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
+CORS_ORIGIN_WHITELIST = env("CORS_ORIGIN_WHITELIST")
+
 # Your stuff...
 # ------------------------------------------------------------------------------

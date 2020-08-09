@@ -13,6 +13,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.2",
     "gulp-uglify-es": "^1.0.4",
+    "husky": "^4.2.5",
     "pixrem": "^5.0.0"
   },
   "engines": {
