@@ -3,7 +3,7 @@ version: '3'
 volumes:
   local_postgres_data: {}
   local_postgres_data_backups: {}
-
+  node_modules: {}
 services:
   django: &django
     build:
@@ -86,16 +86,17 @@ services:
   node:
     build:
       context: .
-      dockerfile: ./compose/local/node/Dockerfile
+      dockerfile: ./compose/local/react/Dockerfile
     image: ronatrack_local_node
     container_name: node
     depends_on:
       - django
     volumes:
-      - .:/app
+      - ./react/ronatrack:/app
       # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
-      - /app/node_modules
-    command: npm run dev
+      - node_modules:/app/node_modules
+    command: /start
+    tty: true
     ports:
       - "3000:3000"
       # Expose browsersync UI: https://www.browsersync.io/docs/options/#option-ui
