@@ -3,7 +3,7 @@ Base settings to build other settings files upon.
 """
 from pathlib import Path
 
-import environ
+import environ, os
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # ronatrack/
@@ -82,6 +82,20 @@ LOCAL_APPS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+# django-extensions
+# ------------------------------------------------------------------------------
+# https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
+INSTALLED_APPS += ["django_extensions"]  # noqa F405
+
+NOTEBOOK_ARGUMENTS = [
+    "--ip", "0.0.0.0",
+    "--port", "8888",
+    "--allow-root",
+    "--no-browser",
+    "--NotebookApp.token=''",
+    "--NotebookApp.password=''"
+]
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true" # only use in development 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules

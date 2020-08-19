@@ -83,6 +83,15 @@ services:
   #     - "5555:5555"
   #   command: /start-flower
 
+  notebook:
+    <<: *django
+    image: ronatrack_local_notebook
+    container_name: notebook
+    ports:
+      - "8888:8888"
+    command: /notebook
+
+
   node:
     build:
       context: .
