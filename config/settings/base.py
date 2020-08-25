@@ -64,6 +64,9 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
+    'polymorphic_tree',
+    'polymorphic',
+    "mptt",
     "crispy_forms",
     "allauth",
     "allauth.account",

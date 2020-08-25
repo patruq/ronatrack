@@ -1,12 +1,8 @@
 from rest_framework import serializers
+from ..models import Survey
 
 
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ["username", "email", "name", "url"]
-
-#         extra_kwargs = {
-#             "url": {"view_name": "api:user-detail", "lookup_field": "username"}
-#         }
+class SurveySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Survey
+        fields = ["name", "version"]
